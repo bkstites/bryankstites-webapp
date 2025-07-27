@@ -373,19 +373,19 @@ function ResultsContent() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">SpO₂:</span>
-                      <span className="font-medium">{vitals.spo2}%</span>
+                      <span className="font-semibold text-gray-900">{vitals.spo2}%</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Respiratory Rate:</span>
-                      <span className="font-medium">{vitals.rr} bpm</span>
+                      <span className="font-semibold text-gray-900">{vitals.rr} bpm</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Heart Rate:</span>
-                      <span className="font-medium">{vitals.hr} bpm</span>
+                      <span className="font-semibold text-gray-900">{vitals.hr} bpm</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Systolic BP:</span>
-                      <span className="font-medium">{vitals.sbp} mmHg</span>
+                      <span className="font-semibold text-gray-900">{vitals.sbp} mmHg</span>
                     </div>
                   </div>
                 </div>
@@ -396,19 +396,19 @@ function ResultsContent() {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Eye Opening:</span>
-                      <span className="font-medium">{vitals.gcs_eye}/4</span>
+                      <span className="font-semibold text-gray-900">{vitals.gcs_eye}/4</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Verbal Response:</span>
-                      <span className="font-medium">{vitals.gcs_verbal}/5</span>
+                      <span className="font-semibold text-gray-900">{vitals.gcs_verbal}/5</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Motor Response:</span>
-                      <span className="font-medium">{vitals.gcs_motor}/6</span>
+                      <span className="font-semibold text-gray-900">{vitals.gcs_motor}/6</span>
                     </div>
                     <div className="flex justify-between border-t pt-2">
                       <span className="text-gray-900 font-medium">Total:</span>
-                      <span className="font-bold text-lg">{gcsTotal}/15</span>
+                      <span className="font-bold text-lg text-gray-900">{gcsTotal}/15</span>
                     </div>
                   </div>
                 </div>
@@ -430,7 +430,7 @@ function ResultsContent() {
                               </span>
                             </div>
                             <div className="text-2xl font-bold text-gray-900 mb-1">{roxScore}</div>
-                            <p className="text-xs text-gray-500">SpO₂/FiO₂ ratio ÷ Respiratory Rate</p>
+                            <p className="text-xs text-gray-600">SpO₂/FiO₂ ratio ÷ Respiratory Rate</p>
                           </div>
                           
                           {/* GCS Score */}
@@ -442,7 +442,7 @@ function ResultsContent() {
                               </span>
                             </div>
                             <div className="text-2xl font-bold text-gray-900 mb-1">{gcsTotal}/15</div>
-                            <p className="text-xs text-gray-500">Eye + Verbal + Motor Response</p>
+                            <p className="text-xs text-gray-600">Eye + Verbal + Motor Response</p>
                           </div>
                           
                           {/* RPP Score */}
@@ -454,7 +454,7 @@ function ResultsContent() {
                               </span>
                             </div>
                             <div className="text-2xl font-bold text-gray-900 mb-1">{rppScore?.toLocaleString()}</div>
-                            <p className="text-xs text-gray-500">Heart Rate × Systolic BP</p>
+                            <p className="text-xs text-gray-600">Heart Rate × Systolic BP</p>
                           </div>
                           
                           {/* Narrative Risk Score */}
@@ -473,7 +473,7 @@ function ResultsContent() {
                               </span>
                             </div>
                             <div className="text-2xl font-bold text-gray-900 mb-1">{narrativeRiskScore}</div>
-                            <p className="text-xs text-gray-500">Keyword-based risk score</p>
+                            <p className="text-xs text-gray-600">Keyword-based risk score</p>
                           </div>
                         </div>
         </div>
