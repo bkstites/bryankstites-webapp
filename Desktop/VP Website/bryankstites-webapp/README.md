@@ -1,39 +1,59 @@
-# vp-portfolio
-custom website for VP persona
+# EMS AI Triage System
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A clinical decision support system for pre-hospital emergency assessment and risk stratification.
+
+## Overview
+
+This application provides real-time risk assessment based on patient vital signs and Glasgow Coma Scale scores. Designed for emergency medical personnel to support clinical decision-making in the field.
+
+## Features
+
+- **Risk Stratification**: Automated assessment of patient risk levels
+- **Resource Allocation**: Guidance for appropriate resource deployment  
+- **Clinical Support**: Evidence-based recommendations for field crews
+- **Narrative Analysis**: AI-powered analysis of patient narratives for additional risk factors
+
+## Assessment Parameters
+
+### Vital Signs
+- SpO₂ (% saturation)
+- Respiratory Rate (breaths/min)
+- Heart Rate (bpm)
+- Systolic BP (mmHg)
+
+### Glasgow Coma Scale
+- Eye Opening (1-4)
+- Verbal Response (1-5)
+- Motor Response (1-6)
+
+## Clinical Scores
+
+The system calculates validated emergency medicine scores:
+- **ROX Score**: SpO₂/FiO₂ ratio ÷ Respiratory Rate
+- **GCS Total**: Eye + Verbal + Motor Response
+- **RPP Score**: Heart Rate × Systolic BP
+- **Narrative Risk Score**: Keyword-based risk assessment
+
+## Technology Stack
+
+- **Frontend**: Next.js 14, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **AI/ML**: Custom risk assessment algorithms based on emergency medicine standards
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Clinical Disclaimer
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This tool provides clinical decision support and should be used in conjunction with professional medical judgment. The system is designed to assist, not replace, clinical decision-making.
