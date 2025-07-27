@@ -549,12 +549,6 @@ function ResultsContent() {
           >
             New Assessment
           </Link>
-          <Link 
-            href="/ems-ai/behind-model" 
-            className="bg-gray-600 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors text-center"
-          >
-            About This Tool
-          </Link>
         </div>
       </div>
     </div>
