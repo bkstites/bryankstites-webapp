@@ -40,6 +40,8 @@ pip install uvicorn fastapi
 # Check if the PA State protocols PDF exists
 if [ -f "../2023v1-2 PA BLS Protocols.pdf" ]; then
     echo "✅ Found PA State protocols PDF"
+    echo "🔄 Integrating PA State protocols..."
+    python extract_pa_protocols.py
 else
     echo "⚠️  PA State protocols PDF not found. Please ensure it's in the parent directory."
 fi
