@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 
-const navLinks = [
-  { href: '/ems-ai/triage', label: 'Assessment' },
-];
+  const navLinks = [
+    { href: '/ems-ai/triage', label: 'Assessment' },
+    { href: '/ems-ai/about-model', label: 'About Model' },
+  ];
 
 export default function Navbar() {
   return (

@@ -701,12 +701,18 @@ function ResultsContent() {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link 
-            href="/ems-ai/triage"
-            className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors text-center"
-          >
-            New Assessment
-          </Link>
+                      <Link 
+              href="/ems-ai/triage" 
+              className="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors text-center"
+            >
+              New Assessment
+            </Link>
+            <Link 
+              href="/ems-ai/about-model" 
+              className="bg-gray-600 text-white px-6 py-3 rounded-md font-medium hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors text-center"
+            >
+              About Model
+            </Link>
         </div>
       </div>
     </div>
