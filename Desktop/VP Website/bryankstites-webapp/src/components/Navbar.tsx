@@ -2,9 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 const navLinks = [
-  { href: '/ems-ai', label: 'Home' },
   { href: '/ems-ai/triage', label: 'Assessment' },
-  { href: '/ems-ai/behind-model', label: 'About Model' },
 ];
 
 export default function Navbar() {
