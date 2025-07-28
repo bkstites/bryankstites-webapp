@@ -417,65 +417,141 @@ function ResultsContent() {
           </div>
         </div>
 
-        {/* Clinical Scores */}
+                {/* Clinical Scores */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Clinical Assessment Scores</h3>
-                                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                          {/* ROX Score */}
-                          <div className="border border-gray-200 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="text-sm font-medium text-gray-700">ROX Score</h4>
-                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadgeColor(respiratoryRisk)}`}>
-                                {respiratoryRisk}
-                              </span>
-                            </div>
-                            <div className="text-2xl font-bold text-gray-900 mb-1">{roxScore}</div>
-                            <p className="text-xs text-gray-600">SpO₂/FiO₂ ratio ÷ Respiratory Rate</p>
-                          </div>
-                          
-                          {/* GCS Score */}
-                          <div className="border border-gray-200 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="text-sm font-medium text-gray-700">GCS Total</h4>
-                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadgeColor(neurologicalRisk)}`}>
-                                {neurologicalRisk}
-                              </span>
-                            </div>
-                            <div className="text-2xl font-bold text-gray-900 mb-1">{gcsTotal}/15</div>
-                            <p className="text-xs text-gray-600">Eye + Verbal + Motor Response</p>
-                          </div>
-                          
-                          {/* RPP Score */}
-                          <div className="border border-gray-200 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="text-sm font-medium text-gray-700">RPP Score</h4>
-                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadgeColor(cardiovascularRisk)}`}>
-                                {cardiovascularRisk}
-                              </span>
-                            </div>
-                            <div className="text-2xl font-bold text-gray-900 mb-1">{rppScore?.toLocaleString()}</div>
-                            <p className="text-xs text-gray-600">Heart Rate × Systolic BP</p>
-                          </div>
-                          
-                          {/* Narrative Risk Score */}
-                          <div className="border border-gray-200 rounded-lg p-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="text-sm font-medium text-gray-700">Narrative Risk</h4>
-                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${
-                                parseInt(narrativeRiskScore) >= 15 ? 'bg-red-100 text-red-800 border-red-200' :
-                                parseInt(narrativeRiskScore) >= 8 ? 'bg-orange-100 text-orange-800 border-orange-200' :
-                                parseInt(narrativeRiskScore) >= 3 ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
-                                'bg-green-100 text-green-800 border-green-200'
-                              }`}>
-                                {parseInt(narrativeRiskScore) >= 15 ? 'High' :
-                                 parseInt(narrativeRiskScore) >= 8 ? 'Moderate' :
-                                 parseInt(narrativeRiskScore) >= 3 ? 'Low' : 'None'}
-                              </span>
-                            </div>
-                            <div className="text-2xl font-bold text-gray-900 mb-1">{narrativeRiskScore}</div>
-                            <p className="text-xs text-gray-600">Keyword-based risk score</p>
-                          </div>
-                        </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {/* ROX Score */}
+            <div className="border border-gray-200 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-sm font-medium text-gray-700">ROX Score</h4>
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadgeColor(respiratoryRisk)}`}>
+                  {respiratoryRisk}
+                </span>
+              </div>
+              
+              {/* Risk Gauge */}
+              <div className="mb-3">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>Low</span>
+                  <span>Moderate</span>
+                  <span>High</span>
+                  <span>Critical</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className={`h-2 rounded-full transition-all duration-300 ${
+                    respiratoryRisk === 'Critical' ? 'bg-red-500 w-full' :
+                    respiratoryRisk === 'High' ? 'bg-orange-500 w-3/4' :
+                    respiratoryRisk === 'Moderate' ? 'bg-yellow-500 w-1/2' :
+                    'bg-green-500 w-1/4'
+                  }`}></div>
+                </div>
+              </div>
+              
+              <div className="text-2xl font-bold text-gray-900 mb-1">{roxScore}</div>
+              <p className="text-xs text-gray-600">SpO₂/FiO₂ ratio ÷ Respiratory Rate</p>
+            </div>
+            
+            {/* GCS Score */}
+            <div className="border border-gray-200 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-sm font-medium text-gray-700">GCS Total</h4>
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadgeColor(neurologicalRisk)}`}>
+                  {neurologicalRisk}
+                </span>
+              </div>
+              
+              {/* Risk Gauge */}
+              <div className="mb-3">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>Low</span>
+                  <span>Moderate</span>
+                  <span>High</span>
+                  <span>Critical</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className={`h-2 rounded-full transition-all duration-300 ${
+                    neurologicalRisk === 'Critical' ? 'bg-red-500 w-full' :
+                    neurologicalRisk === 'High' ? 'bg-orange-500 w-3/4' :
+                    neurologicalRisk === 'Moderate' ? 'bg-yellow-500 w-1/2' :
+                    'bg-green-500 w-1/4'
+                  }`}></div>
+                </div>
+              </div>
+              
+              <div className="text-2xl font-bold text-gray-900 mb-1">{gcsTotal}/15</div>
+              <p className="text-xs text-gray-600">Eye + Verbal + Motor Response</p>
+            </div>
+            
+            {/* RPP Score */}
+            <div className="border border-gray-200 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-sm font-medium text-gray-700">RPP Score</h4>
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadgeColor(cardiovascularRisk)}`}>
+                  {cardiovascularRisk}
+                </span>
+              </div>
+              
+              {/* Risk Gauge */}
+              <div className="mb-3">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>Low</span>
+                  <span>Moderate</span>
+                  <span>High</span>
+                  <span>Critical</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className={`h-2 rounded-full transition-all duration-300 ${
+                    cardiovascularRisk === 'Critical' ? 'bg-red-500 w-full' :
+                    cardiovascularRisk === 'High' ? 'bg-orange-500 w-3/4' :
+                    cardiovascularRisk === 'Moderate' ? 'bg-yellow-500 w-1/2' :
+                    'bg-green-500 w-1/4'
+                  }`}></div>
+                </div>
+              </div>
+              
+              <div className="text-2xl font-bold text-gray-900 mb-1">{rppScore?.toLocaleString()}</div>
+              <p className="text-xs text-gray-600">Heart Rate × Systolic BP</p>
+            </div>
+            
+            {/* Narrative Risk Score */}
+            <div className="border border-gray-200 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-sm font-medium text-gray-700">Narrative Risk</h4>
+                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${
+                  parseInt(narrativeRiskScore) >= 15 ? 'bg-red-100 text-red-800 border-red-200' :
+                  parseInt(narrativeRiskScore) >= 8 ? 'bg-orange-100 text-orange-800 border-orange-200' :
+                  parseInt(narrativeRiskScore) >= 3 ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
+                  'bg-green-100 text-green-800 border-green-200'
+                }`}>
+                  {parseInt(narrativeRiskScore) >= 15 ? 'High' :
+                   parseInt(narrativeRiskScore) >= 8 ? 'Moderate' :
+                   parseInt(narrativeRiskScore) >= 3 ? 'Low' : 'None'}
+                </span>
+              </div>
+              
+              {/* Risk Gauge */}
+              <div className="mb-3">
+                <div className="flex justify-between text-xs text-gray-500 mb-1">
+                  <span>None</span>
+                  <span>Low</span>
+                  <span>Moderate</span>
+                  <span>High</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className={`h-2 rounded-full transition-all duration-300 ${
+                    parseInt(narrativeRiskScore) >= 15 ? 'bg-red-500 w-full' :
+                    parseInt(narrativeRiskScore) >= 8 ? 'bg-orange-500 w-3/4' :
+                    parseInt(narrativeRiskScore) >= 3 ? 'bg-yellow-500 w-1/2' :
+                    'bg-green-500 w-1/4'
+                  }`}></div>
+                </div>
+              </div>
+              
+              <div className="text-2xl font-bold text-gray-900 mb-1">{narrativeRiskScore}</div>
+              <p className="text-xs text-gray-600">Keyword-based risk score</p>
+            </div>
+          </div>
 
           {/* Python Analysis Results */}
           {searchParams.get('triage_score') && (
