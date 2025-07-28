@@ -504,7 +504,7 @@ function ResultsContent() {
                   <div className="border border-green-200 rounded-lg p-4 bg-green-50">
                     <h5 className="text-sm font-medium text-green-900 mb-2">Protocol Matches</h5>
                     <div className="text-sm text-green-800">
-                      {JSON.parse(decodeURIComponent(searchParams.get('protocol_matches') || '[]')).slice(0, 2).map((match: any, index: number) => (
+                      {JSON.parse(decodeURIComponent(searchParams.get('protocol_matches') || '[]')).slice(0, 2).map((match: { protocol_name: string; match_score: number }, index: number) => (
                         <div key={index} className="mb-1">
                           <span className="font-medium">{match.protocol_name}</span>
                           <span className="text-xs ml-2">({Math.round(match.match_score * 100)}%)</span>
@@ -519,7 +519,7 @@ function ResultsContent() {
                   <div className="border border-purple-200 rounded-lg p-4 bg-purple-50">
                     <h5 className="text-sm font-medium text-purple-900 mb-2">Key Terms</h5>
                     <div className="text-sm text-purple-800">
-                      {JSON.parse(decodeURIComponent(searchParams.get('keyword_analysis') || '[]')).slice(0, 3).map((keyword: any, index: number) => (
+                      {JSON.parse(decodeURIComponent(searchParams.get('keyword_analysis') || '[]')).slice(0, 3).map((keyword: { keyword: string; score: number }, index: number) => (
                         <div key={index} className="mb-1">
                           <span className="font-medium">{keyword.keyword}</span>
                           <span className="text-xs ml-2">({Math.round(keyword.score * 100)}%)</span>

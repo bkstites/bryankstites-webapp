@@ -23,8 +23,15 @@ interface PredictionResult {
   narrative_risk_score: number;
   narrative_insights: string[];
   // New fields for Python model integration
-  protocol_matches?: any[];
-  keyword_analysis?: any;
+  protocol_matches?: Array<{
+    protocol_name: string;
+    match_score: number;
+    matched_keywords: string[];
+  }>;
+  keyword_analysis?: Array<{
+    keyword: string;
+    score: number;
+  }>;
   triage_score?: number;
   urgency_level?: string;
 }
@@ -240,7 +247,19 @@ function determineRiskLevels(vitals: VitalSigns, rox: number, gcs: number, rpp: 
 }
 
 // Call Python FastAPI backend for enhanced narrative analysis
-async function analyzeNarrativeWithPython(narrative: string): Promise<any> {
+async function analyzeNarrativeWithPython(narrative: string): Promise<{
+  triage_score?: number;
+  urgency_level?: string;
+  protocol_matches?: Array<{
+    protocol_name: string;
+    match_score: number;
+    matched_keywords: string[];
+  }>;
+  keywords?: Array<{
+    keyword: string;
+    score: number;
+  }>;
+} | null> {
   try {
     const response = await fetch(`${PYTHON_API_URL}/analyze`, {
       method: 'POST',
