@@ -68,6 +68,20 @@ export default function TriagePage() {
         rpp_score: prediction.rpp_score.toString(),
         narrative_risk_score: prediction.narrative_risk_score.toString(),
       });
+
+      // Add Python analysis results if available
+      if (prediction.triage_score) {
+        params.append('triage_score', prediction.triage_score.toString());
+      }
+      if (prediction.urgency_level) {
+        params.append('urgency_level', prediction.urgency_level);
+      }
+      if (prediction.protocol_matches && prediction.protocol_matches.length > 0) {
+        params.append('protocol_matches', encodeURIComponent(JSON.stringify(prediction.protocol_matches)));
+      }
+      if (prediction.keyword_analysis && prediction.keyword_analysis.length > 0) {
+        params.append('keyword_analysis', encodeURIComponent(JSON.stringify(prediction.keyword_analysis)));
+      }
       
       router.push(`/ems-ai/results?${params.toString()}`);
     } catch (error) {

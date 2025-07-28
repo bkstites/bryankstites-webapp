@@ -476,6 +476,61 @@ function ResultsContent() {
                             <p className="text-xs text-gray-600">Keyword-based risk score</p>
                           </div>
                         </div>
+
+          {/* Python Analysis Results */}
+          {searchParams.get('triage_score') && (
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <h4 className="text-lg font-medium text-gray-900 mb-4">AI Protocol Analysis</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Triage Score */}
+                <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
+                  <div className="flex items-center justify-between mb-2">
+                    <h5 className="text-sm font-medium text-blue-900">ML Triage Score</h5>
+                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${
+                      searchParams.get('urgency_level') === 'Critical' ? 'bg-red-100 text-red-800 border-red-200' :
+                      searchParams.get('urgency_level') === 'High' ? 'bg-orange-100 text-orange-800 border-orange-200' :
+                      searchParams.get('urgency_level') === 'Moderate' ? 'bg-yellow-100 text-yellow-800 border-yellow-200' :
+                      'bg-green-100 text-green-800 border-green-200'
+                    }`}>
+                      {searchParams.get('urgency_level') || 'Unknown'}
+                    </span>
+                  </div>
+                  <div className="text-2xl font-bold text-blue-900 mb-1">{searchParams.get('triage_score')}</div>
+                  <p className="text-xs text-blue-700">Machine learning analysis</p>
+                </div>
+
+                {/* Protocol Matches */}
+                {searchParams.get('protocol_matches') && (
+                  <div className="border border-green-200 rounded-lg p-4 bg-green-50">
+                    <h5 className="text-sm font-medium text-green-900 mb-2">Protocol Matches</h5>
+                    <div className="text-sm text-green-800">
+                      {JSON.parse(decodeURIComponent(searchParams.get('protocol_matches') || '[]')).slice(0, 2).map((match: any, index: number) => (
+                        <div key={index} className="mb-1">
+                          <span className="font-medium">{match.protocol_name}</span>
+                          <span className="text-xs ml-2">({Math.round(match.match_score * 100)}%)</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Keyword Analysis */}
+                {searchParams.get('keyword_analysis') && (
+                  <div className="border border-purple-200 rounded-lg p-4 bg-purple-50">
+                    <h5 className="text-sm font-medium text-purple-900 mb-2">Key Terms</h5>
+                    <div className="text-sm text-purple-800">
+                      {JSON.parse(decodeURIComponent(searchParams.get('keyword_analysis') || '[]')).slice(0, 3).map((keyword: any, index: number) => (
+                        <div key={index} className="mb-1">
+                          <span className="font-medium">{keyword.keyword}</span>
+                          <span className="text-xs ml-2">({Math.round(keyword.score * 100)}%)</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Clinical Recommendations */}

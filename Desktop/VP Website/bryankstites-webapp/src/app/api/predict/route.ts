@@ -22,7 +22,15 @@ interface PredictionResult {
   risk_level: 'Low' | 'Moderate' | 'High' | 'Critical';
   narrative_risk_score: number;
   narrative_insights: string[];
+  // New fields for Python model integration
+  protocol_matches?: any[];
+  keyword_analysis?: any;
+  triage_score?: number;
+  urgency_level?: string;
 }
+
+// Python FastAPI backend URL
+const PYTHON_API_URL = process.env.PYTHON_API_URL || 'http://localhost:8000';
 
 // Calculate ROX score (SpO2/FiO2 ratio / Respiratory Rate) - validated in emergency medicine
 function calculateROX(spo2: number, rr: number): number {
@@ -231,10 +239,35 @@ function determineRiskLevels(vitals: VitalSigns, rox: number, gcs: number, rpp: 
   return { respiratory, neurological, cardiovascular, overall, risk_level };
 }
 
-// Narrative analysis based on emergency medicine literature
-function analyzeNarrative(narrative: string): { riskScore: number; insights: string[] } {
-  const insights: string[] = [];
-  const narrativeLower = narrative.toLowerCase();
+// Call Python FastAPI backend for enhanced narrative analysis
+async function analyzeNarrativeWithPython(narrative: string): Promise<any> {
+  try {
+    const response = await fetch(`${PYTHON_API_URL}/analyze`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        narrative: narrative,
+        patient_id: `patient_${Date.now()}`
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Python API error: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Python API call failed:', error);
+    return null;
+  }
+}
+
+// Enhanced narrative analysis based on emergency medicine literature
+function extractNarrativeInsights(patientNarrative: string, riskLevel: string, respiratoryRisk: string, cardiovascularRisk: string, neurologicalRisk: string) {
+  const insights = [];
+  const narrative = patientNarrative.toLowerCase();
   
   // Medical keyword categories with risk levels (based on emergency medicine literature)
   const keywordCategories = {
@@ -302,95 +335,124 @@ function analyzeNarrative(narrative: string): { riskScore: number; insights: str
     }
   };
 
-  let riskScore = 0;
-  const detectedKeywords = {
-    critical: [] as string[],
-    high: [] as string[],
-    moderate: [] as string[]
-  };
-  
-  // Check each category
-  Object.entries(keywordCategories).forEach(([riskLevel, categories]) => {
-    Object.entries(categories).forEach(([category, keywords]) => {
-      keywords.forEach(keyword => {
-        if (narrativeLower.includes(keyword)) {
-          detectedKeywords[riskLevel as keyof typeof detectedKeywords].push(keyword);
-          
-          // Risk scoring based on keyword severity
-          switch (riskLevel) {
-            case 'critical':
-              riskScore += 10;
-              break;
-            case 'high':
-              riskScore += 5;
-              break;
-            case 'moderate':
-              riskScore += 2;
-              break;
+  // Function to detect keywords and calculate risk score
+  function detectKeywords(narrative: string) {
+    const detectedKeywords = {
+      critical: [] as string[],
+      high: [] as string[],
+      moderate: [] as string[]
+    };
+    
+    let riskScore = 0;
+    
+    // Check each category
+    Object.entries(keywordCategories).forEach(([riskLevel, categories]) => {
+      Object.entries(categories).forEach(([category, keywords]) => {
+        keywords.forEach(keyword => {
+          if (narrative.includes(keyword)) {
+            detectedKeywords[riskLevel as keyof typeof detectedKeywords].push(keyword);
+            
+            // Risk scoring based on keyword severity
+            switch (riskLevel) {
+              case 'critical':
+                riskScore += 10;
+                break;
+              case 'high':
+                riskScore += 5;
+                break;
+              case 'moderate':
+                riskScore += 2;
+                break;
+            }
           }
-        }
+        });
       });
     });
-  });
+    
+    return { detectedKeywords, riskScore };
+  }
+
+  // Analyze narrative for keywords
+  const { detectedKeywords, riskScore } = detectKeywords(narrative);
   
   // Generate insights based on detected keywords
   if (detectedKeywords.critical.length > 0) {
-    insights.push('🚨 CRITICAL SYMPTOMS DETECTED: Immediate medical attention required');
+    insights.push('🚨 **CRITICAL SYMPTOMS DETECTED**: Immediate medical attention required');
     detectedKeywords.critical.forEach(keyword => {
-      insights.push(`🚨 ${keyword.toUpperCase()}: Requires immediate assessment`);
+      insights.push(`🚨 **${keyword.toUpperCase()}**: Requires immediate assessment`);
     });
   }
   
   if (detectedKeywords.high.length > 0) {
-    insights.push('⚠️ HIGH RISK SYMPTOMS: Significant medical concern');
+    insights.push('⚠️ **HIGH RISK SYMPTOMS**: Significant medical concern');
     detectedKeywords.high.forEach(keyword => {
-      insights.push(`⚠️ ${keyword}: Monitor closely, prepare for escalation`);
+      insights.push(`⚠️ **${keyword}**: Monitor closely, prepare for escalation`);
     });
   }
   
   if (detectedKeywords.moderate.length > 0) {
-    insights.push('📋 MODERATE SYMPTOMS: Standard monitoring required');
+    insights.push('📋 **MODERATE SYMPTOMS**: Standard monitoring required');
     detectedKeywords.moderate.forEach(keyword => {
-      insights.push(`📋 ${keyword}: Document and monitor`);
+      insights.push(`📋 **${keyword}**: Document and monitor`);
     });
   }
 
   // Specific medical condition alerts
-  if (narrativeLower.includes('diabetes') || narrativeLower.includes('diabetic')) {
-    insights.push('💉 Diabetes Alert: Check blood glucose, monitor for hypo/hyperglycemia');
+  if (narrative.includes('diabetes') || narrative.includes('diabetic')) {
+    insights.push('💉 **Diabetes Alert**: Check blood glucose, monitor for hypo/hyperglycemia');
   }
   
-  if (narrativeLower.includes('heart') || narrativeLower.includes('cardiac')) {
-    insights.push('❤️ Cardiac History: Prepare for cardiac assessment, consider ECG');
+  if (narrative.includes('heart') || narrative.includes('cardiac')) {
+    insights.push('❤️ **Cardiac History**: Prepare for cardiac assessment, consider ECG');
   }
   
-  if (narrativeLower.includes('copd') || narrativeLower.includes('asthma') || narrativeLower.includes('lung')) {
-    insights.push('🫁 Respiratory Condition: Monitor airway, prepare breathing treatments');
+  if (narrative.includes('copd') || narrative.includes('asthma') || narrative.includes('lung')) {
+    insights.push('🫁 **Respiratory Condition**: Monitor airway, prepare breathing treatments');
   }
   
-  if (narrativeLower.includes('stroke') || narrativeLower.includes('cva')) {
-    insights.push('🧠 Stroke History: Monitor for new symptoms, check FAST signs');
+  if (narrative.includes('stroke') || narrative.includes('cva')) {
+    insights.push('🧠 **Stroke History**: Monitor for new symptoms, check FAST signs');
   }
 
   // Medication alerts
-  if (narrativeLower.includes('blood thinner') || narrativeLower.includes('warfarin') || narrativeLower.includes('coumadin')) {
-    insights.push('🩸 Blood Thinner Alert: Increased bleeding risk, check for bleeding');
+  if (narrative.includes('blood thinner') || narrative.includes('warfarin') || narrative.includes('coumadin')) {
+    insights.push('🩸 **Blood Thinner Alert**: Increased bleeding risk, check for bleeding');
   }
   
-  if (narrativeLower.includes('insulin')) {
-    insights.push('💉 Insulin Alert: Check blood glucose, watch for hypoglycemia');
+  if (narrative.includes('insulin')) {
+    insights.push('💉 **Insulin Alert**: Check blood glucose, watch for hypoglycemia');
+  }
+
+  // Risk-specific insights based on vital signs
+  if (respiratoryRisk === 'Critical' || respiratoryRisk === 'High') {
+    insights.push('🫁 **Respiratory Distress Detected**: Prepare for airway management');
+  }
+  
+  if (cardiovascularRisk === 'Critical' || cardiovascularRisk === 'High') {
+    insights.push('❤️ **Cardiovascular Stress Detected**: Monitor ECG, prepare for cardiac care');
+  }
+  
+  if (neurologicalRisk === 'Critical' || neurologicalRisk === 'High') {
+    insights.push('🧠 **Neurological Concerns**: Monitor consciousness, check for stroke signs');
   }
 
   // Overall risk assessment integration
   if (riskScore >= 15) {
-    insights.push('🚨 HIGH NARRATIVE RISK SCORE: Multiple concerning symptoms detected');
+    insights.push('🚨 **HIGH NARRATIVE RISK SCORE**: Multiple concerning symptoms detected');
   } else if (riskScore >= 8) {
-    insights.push('⚠️ MODERATE NARRATIVE RISK SCORE: Several symptoms require attention');
+    insights.push('⚠️ **MODERATE NARRATIVE RISK SCORE**: Several symptoms require attention');
   } else if (riskScore >= 3) {
-    insights.push('📋 LOW NARRATIVE RISK SCORE: Minor symptoms noted');
+    insights.push('📋 **LOW NARRATIVE RISK SCORE**: Minor symptoms noted');
   }
 
-  return { riskScore, insights };
+  // General safety reminders
+  if (riskLevel === 'Critical') {
+    insights.push('🚨 **CRITICAL PATIENT**: Stay alert for rapid deterioration, prepare for emergency');
+  } else if (riskLevel === 'High') {
+    insights.push('⚠️ **HIGH RISK PATIENT**: Monitor closely, be ready to escalate care');
+  }
+
+  return insights;
 }
 
 export async function POST(request: NextRequest) {
@@ -424,16 +486,34 @@ export async function POST(request: NextRequest) {
 
     // Analyze narrative if provided
     const patientNarrative = body.patient_narrative || '';
-    const narrativeAnalysis = analyzeNarrative(patientNarrative);
+    const narrativeAnalysis = extractNarrativeInsights(patientNarrative, riskAssessment.risk_level, riskAssessment.respiratory, riskAssessment.cardiovascular, riskAssessment.neurological);
+
+    // Try to get enhanced analysis from Python backend
+    let pythonAnalysis = null;
+    if (patientNarrative.trim()) {
+      pythonAnalysis = await analyzeNarrativeWithPython(patientNarrative);
+    }
 
     // Integrate narrative risk with vital signs risk
     let finalRiskLevel = riskAssessment.risk_level;
-    if (narrativeAnalysis.riskScore >= 15) {
+    let narrativeRiskScore = 0;
+    
+    // Calculate narrative risk score
+    const narrative = patientNarrative.toLowerCase();
+    if (narrative.includes('chest pain') || narrative.includes('heart attack')) narrativeRiskScore += 10;
+    if (narrative.includes('stroke') || narrative.includes('facial droop')) narrativeRiskScore += 10;
+    if (narrative.includes('can\'t breathe') || narrative.includes('respiratory arrest')) narrativeRiskScore += 10;
+    if (narrative.includes('unconscious') || narrative.includes('seizure')) narrativeRiskScore += 10;
+    if (narrative.includes('bleeding') || narrative.includes('trauma')) narrativeRiskScore += 8;
+    if (narrative.includes('diabetes') || narrative.includes('diabetic')) narrativeRiskScore += 5;
+    if (narrative.includes('copd') || narrative.includes('asthma')) narrativeRiskScore += 5;
+
+    if (narrativeRiskScore >= 15) {
       // High narrative risk can escalate overall risk
       if (finalRiskLevel === 'Low') finalRiskLevel = 'Moderate';
       else if (finalRiskLevel === 'Moderate') finalRiskLevel = 'High';
       else if (finalRiskLevel === 'High') finalRiskLevel = 'Critical';
-    } else if (narrativeAnalysis.riskScore >= 8) {
+    } else if (narrativeRiskScore >= 8) {
       // Moderate narrative risk can escalate from Low to Moderate
       if (finalRiskLevel === 'Low') finalRiskLevel = 'Moderate';
     }
@@ -447,8 +527,15 @@ export async function POST(request: NextRequest) {
       cardiovascular_risk: riskAssessment.cardiovascular,
       overall_risk: riskAssessment.overall,
       risk_level: finalRiskLevel,
-      narrative_risk_score: narrativeAnalysis.riskScore,
-      narrative_insights: narrativeAnalysis.insights,
+      narrative_risk_score: narrativeRiskScore,
+      narrative_insights: narrativeAnalysis,
+      // Add Python analysis results if available
+      ...(pythonAnalysis && {
+        protocol_matches: pythonAnalysis.protocol_matches || [],
+        keyword_analysis: pythonAnalysis.keywords || [],
+        triage_score: pythonAnalysis.triage_score || 0,
+        urgency_level: pythonAnalysis.urgency_level || 'Unknown'
+      })
     };
 
     return NextResponse.json(result);
