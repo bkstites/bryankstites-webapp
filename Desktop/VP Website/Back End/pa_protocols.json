@@ -1,0 +1,153 @@
+[
+  {
+    "name": "PA Cardiac Arrest Protocol",
+    "text": "PA CARDIAC ARREST PROTOCOL\nAssessment:\n- Check responsiveness and breathing\n- Activate EMS immediately\n- Begin chest compressions at 100-120/min\n- Use AED as soon as available\n- Continue CPR until ALS arrives\n- Transport to nearest appropriate facility\n- Document time of arrest and interventions",
+    "keywords": [
+      "cardiac arrest",
+      "cpr",
+      "aed",
+      "chest compressions",
+      "unresponsive",
+      "no pulse"
+    ]
+  },
+  {
+    "name": "PA Chest Pain Protocol",
+    "text": "PA CHEST PAIN PROTOCOL\nAssessment:\n- 12-lead ECG within 10 minutes\n- Aspirin 325mg PO if no contraindications\n- Nitroglycerin 0.4mg SL if systolic BP >90\n- Oxygen if SpO2 <94%\n- Rapid transport to cardiac center\n- Activate cardiac alert if STEMI criteria met\n- Monitor vital signs every 5 minutes",
+    "keywords": [
+      "chest pain",
+      "cardiac",
+      "ecg",
+      "aspirin",
+      "nitroglycerin",
+      "oxygen",
+      "transport"
+    ]
+  },
+  {
+    "name": "PA Stroke Protocol",
+    "text": "PA STROKE PROTOCOL\nFAST Assessment:\n- Face: Facial droop\n- Arms: Arm drift\n- Speech: Speech difficulty\n- Time: Time of onset\n- Glucose check\n- Rapid transport to stroke center\n- Document last known normal time\n- Consider thrombolytic window",
+    "keywords": [
+      "stroke",
+      "fast",
+      "facial droop",
+      "arm drift",
+      "speech",
+      "glucose",
+      "transport"
+    ]
+  },
+  {
+    "name": "PA Trauma Protocol",
+    "text": "PA TRAUMA PROTOCOL\nPrimary Survey:\n- Airway assessment and management\n- Breathing assessment and ventilation\n- Circulation assessment and hemorrhage control\n- Disability assessment (GCS)\n- Exposure and environmental control\n- Spinal immobilization if indicated\n- Rapid transport to trauma center\n- Consider trauma alert activation",
+    "keywords": [
+      "trauma",
+      "airway",
+      "breathing",
+      "circulation",
+      "bleeding",
+      "transport",
+      "gcs"
+    ]
+  },
+  {
+    "name": "PA Respiratory Distress Protocol",
+    "text": "PA RESPIRATORY DISTRESS PROTOCOL\nAssessment:\n- Oxygen saturation monitoring\n- Respiratory rate assessment\n- Breath sounds evaluation\n- Accessory muscle use assessment\n- Tripoding position evaluation\n\nInterventions:\n- Oxygen Therapy: NRB mask at 15 LPM or nasal cannula at 2-6 LPM\n- CPAP: Evaluate for CPAP if patient meets criteria (SpO2 < 90%, RR > 25)\n- Assisted Inhaler: Administer albuterol via nebulizer or MDI\n- Positioning: Keep patient in position of comfort (tripoding)\n- Monitoring: Continuous pulse oximetry and respiratory rate\n- ALS Activation: Consider for severe respiratory distress\n- Advanced Airway: Prepare for potential intubation if needed\n\nTransport:\n- Transport to appropriate facility\n- Monitor for deterioration\n- Consider ALS intercept",
+    "keywords": [
+      "respiratory",
+      "breathing",
+      "oxygen",
+      "distress",
+      "cpap",
+      "transport",
+      "shortness of breath",
+      "wheezing",
+      "asthma",
+      "copd",
+      "tripoding",
+      "accessory muscles",
+      "nasal flaring",
+      "nrb",
+      "albuterol",
+      "nebulizer"
+    ]
+  },
+  {
+    "name": "PA Diabetic Emergency Protocol",
+    "text": "PA DIABETIC EMERGENCY PROTOCOL\nAssessment:\n- Check blood glucose\n- Assess level of consciousness\n- Look for signs of DKA or hypoglycemia\n- Administer oral glucose if conscious and able to swallow\n- Transport to appropriate facility\n- Monitor vital signs\n- Consider IV access if needed",
+    "keywords": [
+      "diabetes",
+      "diabetic",
+      "glucose",
+      "hypoglycemia",
+      "dka",
+      "unconscious",
+      "sugar"
+    ]
+  },
+  {
+    "name": "PA Seizure Protocol",
+    "text": "PA SEIZURE PROTOCOL\nAssessment:\n- Ensure airway patency\n- Protect from injury\n- Do not restrain\n- Time the seizure\n- Check for medical alert bracelet\n- Transport to appropriate facility\n- Monitor vital signs\n- Consider status epilepticus",
+    "keywords": [
+      "seizure",
+      "convulsion",
+      "unconscious",
+      "medical alert",
+      "epilepsy",
+      "status"
+    ]
+  },
+  {
+    "name": "PA Pediatric Protocol",
+    "text": "PA PEDIATRIC PROTOCOL\nAssessment:\n- Use pediatric assessment triangle\n- Check airway, breathing, circulation\n- Use age-appropriate equipment\n- Monitor vital signs\n- Transport to pediatric facility if possible\n- Consider child abuse assessment\n- Document developmental milestones",
+    "keywords": [
+      "pediatric",
+      "child",
+      "infant",
+      "baby",
+      "pediatric assessment",
+      "child abuse"
+    ]
+  },
+  {
+    "name": "PA Obstetric Emergency Protocol",
+    "text": "PA OBSTETRIC EMERGENCY PROTOCOL\nAssessment:\n- Check for crowning\n- Assess contractions\n- Monitor fetal heart tones if possible\n- Prepare for delivery if imminent\n- Transport to obstetric facility\n- Consider complications\n- Document pregnancy history",
+    "keywords": [
+      "pregnant",
+      "labor",
+      "delivery",
+      "contractions",
+      "crowning",
+      "obstetric"
+    ]
+  },
+  {
+    "name": "PA Behavioral Emergency Protocol",
+    "text": "PA BEHAVIORAL EMERGENCY PROTOCOL\nAssessment:\n- Ensure scene safety\n- Assess for medical causes\n- Use de-escalation techniques\n- Consider restraints only if necessary\n- Transport to appropriate facility\n- Document behavior and interventions\n- Consider law enforcement if needed",
+    "keywords": [
+      "behavioral",
+      "psychiatric",
+      "agitation",
+      "violent",
+      "mental health",
+      "restraints"
+    ]
+  },
+  {
+    "name": "PA Asthma Protocol",
+    "text": "PA ASTHMA PROTOCOL\nAssessment:\n- Respiratory rate and effort\n- Oxygen saturation\n- Breath sounds (wheezing)\n- Accessory muscle use\n- Tripoding position\n- Peak flow if available\n\nInterventions:\n- Oxygen Therapy: NRB mask at 15 LPM or nasal cannula at 2-6 LPM\n- Albuterol: 2.5mg via nebulizer or 2 puffs via MDI\n- Ipratropium: 0.5mg via nebulizer (if available)\n- Positioning: Keep patient in position of comfort\n- Monitoring: Continuous pulse oximetry and respiratory rate\n\nSevere Asthma Indicators:\n- Unable to speak in complete sentences\n- Tripoding position\n- Accessory muscle use\n- SpO2 < 90%\n- Respiratory rate > 30\n- Peak flow < 50% predicted\n\nALS Activation:\n- Consider immediate ALS for severe asthma\n- Prepare for potential intubation\n- Consider magnesium sulfate (ALS only)\n\nTransport:\n- Transport to appropriate facility\n- Monitor for deterioration\n- Consider ALS intercept",
+    "keywords": [
+      "asthma",
+      "wheezing",
+      "albuterol",
+      "nebulizer",
+      "mdi",
+      "respiratory distress",
+      "tripoding",
+      "accessory muscles",
+      "peak flow",
+      "ipratropium",
+      "magnesium"
+    ]
+  }
+]

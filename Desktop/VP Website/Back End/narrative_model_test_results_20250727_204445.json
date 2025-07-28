@@ -1,0 +1,640 @@
+{
+  "timestamp": "2025-07-27T20:44:45.050286",
+  "overall_metrics": {
+    "total_tests": 15,
+    "successful_tests": 15,
+    "success_rate": 1.0,
+    "avg_response_time": 0.0057770729064941405,
+    "avg_protocol_accuracy": 0.6088888888888889,
+    "urgency_accuracy_rate": 0.0,
+    "avg_keyword_overlap": 0.171010101010101
+  },
+  "category_metrics": {
+    "Cardiac": {
+      "test_count": 2,
+      "success_count": 2,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.3333333333333333,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.13257575757575757,
+      "avg_response_time": 0.006748676300048828
+    },
+    "Respiratory": {
+      "test_count": 2,
+      "success_count": 2,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.5,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.09090909090909091,
+      "avg_response_time": 0.006061553955078125
+    },
+    "Neurological": {
+      "test_count": 2,
+      "success_count": 2,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.5,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.13257575757575757,
+      "avg_response_time": 0.006359219551086426
+    },
+    "Trauma": {
+      "test_count": 2,
+      "success_count": 2,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.5,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.18181818181818182,
+      "avg_response_time": 0.006191611289978027
+    },
+    "Medical": {
+      "test_count": 2,
+      "success_count": 2,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.8333333333333333,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.16666666666666666,
+      "avg_response_time": 0.005410909652709961
+    },
+    "Pediatric": {
+      "test_count": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 1.0,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.3,
+      "avg_response_time": 0.005006074905395508
+    },
+    "Obstetric": {
+      "test_count": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 1.0,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.08333333333333333,
+      "avg_response_time": 0.005128145217895508
+    },
+    "Behavioral": {
+      "test_count": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.0,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.3,
+      "avg_response_time": 0.005201101303100586
+    },
+    "Low Acuity": {
+      "test_count": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 1.0,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.2,
+      "avg_response_time": 0.004944801330566406
+    },
+    "Complex": {
+      "test_count": 1,
+      "success_count": 1,
+      "success_rate": 1.0,
+      "avg_protocol_accuracy": 0.8,
+      "urgency_accuracy_rate": 0.0,
+      "avg_keyword_overlap": 0.2727272727272727,
+      "avg_response_time": 0.004832029342651367
+    }
+  },
+  "detailed_results": [
+    {
+      "test_id": "cardiac_001",
+      "category": "Cardiac",
+      "description": "Classic cardiac symptoms",
+      "narrative": "Patient experiencing severe chest pain radiating to left arm, shortness of breath, diaphoretic",
+      "expected_protocols": [
+        "PA Chest Pain Protocol"
+      ],
+      "actual_protocols": [
+        "PA Chest Pain Protocol",
+        "PA Respiratory Distress Protocol"
+      ],
+      "expected_urgency": "Critical",
+      "actual_urgency": "MODERATE",
+      "expected_keywords": [
+        "chest pain",
+        "shortness of breath",
+        "diaphoretic"
+      ],
+      "actual_keywords": [
+        "arm",
+        "arm shortness",
+        "breath",
+        "breath diaphoretic",
+        "chest",
+        "chest pain",
+        "diaphoretic",
+        "experiencing",
+        "experiencing severe",
+        "left"
+      ],
+      "protocol_accuracy": 0.6666666666666666,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.18181818181818182,
+      "response_time": 0.008886098861694336,
+      "success": true
+    },
+    {
+      "test_id": "cardiac_002",
+      "category": "Cardiac",
+      "description": "Atypical cardiac presentation",
+      "narrative": "Patient with history of heart disease complaining of pressure in chest, feeling lightheaded",
+      "expected_protocols": [
+        "PA Chest Pain Protocol"
+      ],
+      "actual_protocols": [],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "chest",
+        "pressure",
+        "lightheaded"
+      ],
+      "actual_keywords": [
+        "chest",
+        "chest feeling",
+        "complaining",
+        "complaining pressure",
+        "disease",
+        "disease complaining",
+        "feeling",
+        "feeling lightheaded",
+        "heart",
+        "heart disease"
+      ],
+      "protocol_accuracy": 0.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.08333333333333333,
+      "response_time": 0.00461125373840332,
+      "success": true
+    },
+    {
+      "test_id": "respiratory_001",
+      "category": "Respiratory",
+      "description": "Severe respiratory distress",
+      "narrative": "Patient unable to breathe, wheezing, using accessory muscles, SpO2 88%",
+      "expected_protocols": [
+        "PA Respiratory Distress Protocol"
+      ],
+      "actual_protocols": [],
+      "expected_urgency": "Critical",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "unable to breathe",
+        "wheezing",
+        "accessory muscles"
+      ],
+      "actual_keywords": [
+        "accessory",
+        "accessory muscle",
+        "breathe",
+        "breathe wheezing",
+        "muscle",
+        "muscle spo2",
+        "spo2",
+        "unable",
+        "unable breathe",
+        "using"
+      ],
+      "protocol_accuracy": 0.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.0,
+      "response_time": 0.006069183349609375,
+      "success": true
+    },
+    {
+      "test_id": "respiratory_002",
+      "category": "Respiratory",
+      "description": "COPD exacerbation",
+      "narrative": "Patient with COPD experiencing increased shortness of breath, coughing up green sputum",
+      "expected_protocols": [
+        "PA Respiratory Distress Protocol"
+      ],
+      "actual_protocols": [
+        "PA Respiratory Distress Protocol"
+      ],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "copd",
+        "shortness of breath",
+        "coughing"
+      ],
+      "actual_keywords": [
+        "breath",
+        "breath coughing",
+        "copd",
+        "copd experiencing",
+        "coughing",
+        "coughing green",
+        "experiencing",
+        "experiencing increased",
+        "green",
+        "green sputum"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.18181818181818182,
+      "response_time": 0.006053924560546875,
+      "success": true
+    },
+    {
+      "test_id": "neuro_001",
+      "category": "Neurological",
+      "description": "Stroke symptoms",
+      "narrative": "Patient with sudden facial droop, slurred speech, right arm weakness",
+      "expected_protocols": [
+        "PA Stroke Protocol"
+      ],
+      "actual_protocols": [
+        "PA Stroke Protocol"
+      ],
+      "expected_urgency": "Critical",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "facial droop",
+        "slurred speech",
+        "weakness"
+      ],
+      "actual_keywords": [
+        "arm",
+        "arm weakness",
+        "droop",
+        "droop slurred",
+        "facial",
+        "facial droop",
+        "right",
+        "right arm",
+        "slurred",
+        "slurred speech"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.18181818181818182,
+      "response_time": 0.006044149398803711,
+      "success": true
+    },
+    {
+      "test_id": "neuro_002",
+      "category": "Neurological",
+      "description": "Altered mental status",
+      "narrative": "Patient found unconscious, not responding to verbal commands, GCS 6",
+      "expected_protocols": [
+        "PA Stroke Protocol"
+      ],
+      "actual_protocols": [
+        "PA Seizure Protocol",
+        "PA Trauma Protocol",
+        "PA Diabetic Emergency Protocol"
+      ],
+      "expected_urgency": "Critical",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "unconscious",
+        "not responding",
+        "gcs"
+      ],
+      "actual_keywords": [
+        "command",
+        "command gc",
+        "found",
+        "found unconscious",
+        "gc",
+        "responding",
+        "responding verbal",
+        "unconscious",
+        "unconscious responding",
+        "verbal"
+      ],
+      "protocol_accuracy": 0.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.08333333333333333,
+      "response_time": 0.006674289703369141,
+      "success": true
+    },
+    {
+      "test_id": "trauma_001",
+      "category": "Trauma",
+      "description": "Motor vehicle collision with injuries",
+      "narrative": "Patient involved in MVC, bleeding from head wound, complaining of neck pain",
+      "expected_protocols": [
+        "PA Trauma Protocol"
+      ],
+      "actual_protocols": [
+        "PA Trauma Protocol"
+      ],
+      "expected_urgency": "Critical",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "mvc",
+        "bleeding",
+        "neck pain"
+      ],
+      "actual_keywords": [
+        "bleeding",
+        "bleeding head",
+        "complaining",
+        "complaining neck",
+        "head",
+        "head wound",
+        "involved",
+        "involved mvc",
+        "mvc",
+        "mvc bleeding"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.18181818181818182,
+      "response_time": 0.006329059600830078,
+      "success": true
+    },
+    {
+      "test_id": "trauma_002",
+      "category": "Trauma",
+      "description": "Fall with potential spinal injury",
+      "narrative": "Patient fell from ladder, complaining of back pain, unable to move legs",
+      "expected_protocols": [
+        "PA Trauma Protocol"
+      ],
+      "actual_protocols": [],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "fell",
+        "back pain",
+        "unable to move"
+      ],
+      "actual_keywords": [
+        "back",
+        "back pain",
+        "complaining",
+        "complaining back",
+        "fell",
+        "fell ladder",
+        "ladder",
+        "ladder complaining",
+        "leg",
+        "move"
+      ],
+      "protocol_accuracy": 0.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.18181818181818182,
+      "response_time": 0.0060541629791259766,
+      "success": true
+    },
+    {
+      "test_id": "medical_001",
+      "category": "Medical",
+      "description": "Hypoglycemic episode",
+      "narrative": "Patient with diabetes, blood glucose 45, confused and diaphoretic",
+      "expected_protocols": [
+        "PA Diabetic Emergency Protocol"
+      ],
+      "actual_protocols": [
+        "PA Diabetic Emergency Protocol",
+        "PA Stroke Protocol"
+      ],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "diabetes",
+        "blood glucose",
+        "confused"
+      ],
+      "actual_keywords": [
+        "blood",
+        "blood glucose",
+        "confused",
+        "confused diaphoretic",
+        "diabetes",
+        "diabetes blood",
+        "diaphoretic",
+        "glucose",
+        "glucose confused"
+      ],
+      "protocol_accuracy": 0.6666666666666666,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.3333333333333333,
+      "response_time": 0.0047380924224853516,
+      "success": true
+    },
+    {
+      "test_id": "medical_002",
+      "category": "Medical",
+      "description": "Active seizure",
+      "narrative": "Patient experiencing seizure, tonic-clonic movements, post-ictal confusion",
+      "expected_protocols": [
+        "PA Seizure Protocol"
+      ],
+      "actual_protocols": [
+        "PA Seizure Protocol"
+      ],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "seizure",
+        "tonic-clonic",
+        "post-ictal"
+      ],
+      "actual_keywords": [
+        "clonic",
+        "clonic movement",
+        "confusion",
+        "experiencing",
+        "experiencing seizure",
+        "ictal",
+        "ictal confusion",
+        "movement",
+        "movement post",
+        "post"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.0,
+      "response_time": 0.00608372688293457,
+      "success": true
+    },
+    {
+      "test_id": "pediatric_001",
+      "category": "Pediatric",
+      "description": "Pediatric fever with dehydration",
+      "narrative": "2-year-old child with high fever, lethargic, not eating or drinking",
+      "expected_protocols": [
+        "PA Pediatric Protocol"
+      ],
+      "actual_protocols": [
+        "PA Pediatric Protocol"
+      ],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "child",
+        "fever",
+        "lethargic"
+      ],
+      "actual_keywords": [
+        "child",
+        "child high",
+        "drinking",
+        "eating",
+        "eating drinking",
+        "fever",
+        "fever lethargic",
+        "high",
+        "high fever",
+        "lethargic"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.3,
+      "response_time": 0.005006074905395508,
+      "success": true
+    },
+    {
+      "test_id": "obstetric_001",
+      "category": "Obstetric",
+      "description": "Active labor",
+      "narrative": "Pregnant patient at 38 weeks, contractions every 3 minutes, water broke",
+      "expected_protocols": [
+        "PA Obstetric Emergency Protocol"
+      ],
+      "actual_protocols": [
+        "PA Obstetric Emergency Protocol"
+      ],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "pregnant",
+        "contractions",
+        "water broke"
+      ],
+      "actual_keywords": [
+        "broke",
+        "contraction",
+        "contraction every",
+        "every",
+        "every minute",
+        "minute",
+        "minute water",
+        "pregnant",
+        "pregnant week",
+        "water"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.08333333333333333,
+      "response_time": 0.005128145217895508,
+      "success": true
+    },
+    {
+      "test_id": "behavioral_001",
+      "category": "Behavioral",
+      "description": "Psychiatric emergency",
+      "narrative": "Patient threatening harm to self and others, agitated, refusing medication",
+      "expected_protocols": [
+        "PA Behavioral Emergency Protocol"
+      ],
+      "actual_protocols": [],
+      "expected_urgency": "High",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "threatening",
+        "agitated",
+        "refusing"
+      ],
+      "actual_keywords": [
+        "agitated",
+        "agitated refusing",
+        "harm",
+        "harm self",
+        "others",
+        "others agitated",
+        "refusing",
+        "self",
+        "self others",
+        "threatening"
+      ],
+      "protocol_accuracy": 0.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.3,
+      "response_time": 0.005201101303100586,
+      "success": true
+    },
+    {
+      "test_id": "low_acuity_001",
+      "category": "Low Acuity",
+      "description": "Minor injury",
+      "narrative": "Patient with minor ankle sprain, able to bear weight, no deformity",
+      "expected_protocols": [],
+      "actual_protocols": [],
+      "expected_urgency": "Low",
+      "actual_urgency": "LOW",
+      "expected_keywords": [
+        "ankle sprain",
+        "minor"
+      ],
+      "actual_keywords": [
+        "able",
+        "able bear",
+        "ankle",
+        "ankle sprain",
+        "bear",
+        "bear weight",
+        "deformity",
+        "minor",
+        "minor ankle",
+        "sprain"
+      ],
+      "protocol_accuracy": 1.0,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.2,
+      "response_time": 0.004944801330566406,
+      "success": true
+    },
+    {
+      "test_id": "complex_001",
+      "category": "Complex",
+      "description": "Multi-morbidity case",
+      "narrative": "Elderly patient with chest pain, diabetes, COPD, and recent stroke history",
+      "expected_protocols": [
+        "PA Chest Pain Protocol",
+        "PA Diabetic Emergency Protocol"
+      ],
+      "actual_protocols": [
+        "PA Chest Pain Protocol",
+        "PA Stroke Protocol",
+        "PA Diabetic Emergency Protocol"
+      ],
+      "expected_urgency": "Critical",
+      "actual_urgency": "MODERATE",
+      "expected_keywords": [
+        "chest pain",
+        "diabetes",
+        "copd",
+        "stroke"
+      ],
+      "actual_keywords": [
+        "chest",
+        "chest pain",
+        "copd",
+        "copd recent",
+        "diabetes",
+        "diabetes copd",
+        "elderly",
+        "elderly chest",
+        "history",
+        "pain"
+      ],
+      "protocol_accuracy": 0.8,
+      "urgency_accuracy": false,
+      "keyword_overlap": 0.2727272727272727,
+      "response_time": 0.004832029342651367,
+      "success": true
+    }
+  ]
+}
