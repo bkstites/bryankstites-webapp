@@ -82,6 +82,9 @@ export default function TriagePage() {
       if (prediction.keyword_analysis && prediction.keyword_analysis.length > 0) {
         params.append('keyword_analysis', encodeURIComponent(JSON.stringify(prediction.keyword_analysis)));
       }
+      if (prediction.protocol_recommendations && prediction.protocol_recommendations.length > 0) {
+        params.append('protocol_recommendations', encodeURIComponent(JSON.stringify(prediction.protocol_recommendations)));
+      }
       
       router.push(`/ems-ai/results?${params.toString()}`);
     } catch (error) {

@@ -34,6 +34,7 @@ interface PredictionResult {
   }>;
   triage_score?: number;
   urgency_level?: string;
+  protocol_recommendations?: string[];
 }
 
 // Python FastAPI backend URL
@@ -259,6 +260,7 @@ async function analyzeNarrativeWithPython(narrative: string): Promise<{
     keyword: string;
     score: number;
   }>;
+  recommendations?: string[];
 } | null> {
   try {
     const response = await fetch(`${PYTHON_API_URL}/analyze`, {
@@ -553,7 +555,8 @@ export async function POST(request: NextRequest) {
         protocol_matches: pythonAnalysis.protocol_matches || [],
         keyword_analysis: pythonAnalysis.keywords || [],
         triage_score: pythonAnalysis.triage_score || 0,
-        urgency_level: pythonAnalysis.urgency_level || 'Unknown'
+        urgency_level: pythonAnalysis.urgency_level || 'Unknown',
+        protocol_recommendations: pythonAnalysis.recommendations || []
       })
     };
 
